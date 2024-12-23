@@ -5,6 +5,7 @@ import { BrowserRouter as Router,Routes,Route, useNavigate} from "react-router-d
 import Eat from "./Components/Eat";
 import Travel from "./Components/Travel";
 import About from "./Components/About";
+import Profile from "./Components/Profile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -21,6 +22,8 @@ function App() {
     <Router>
       <Navbar/>
       <Routes>
+        <Route path="/"/>
+        <Route path="/profile" element={<profile/>}/>
         <Route path="/Eat" element={<Eat/>}/>
         <Route path="/Travel" element={<Travel/>}/>
         <Route path="/About" element={<About/>}/>

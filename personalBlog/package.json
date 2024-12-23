@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lordicon/react": "^1.10.1",
     "firebase": "^11.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.1.0"
+    "react-firebase-hooks": "^5.1.1",
+    "react-router-dom": "^7.1.0",
+    "reactjs-popup": "^2.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

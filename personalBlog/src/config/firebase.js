@@ -1,5 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { GoogleAuthProvider } from "firebase/auth/web-extension";
+import { getAuth } from "firebase/auth";
+import Navbar from "../Components/Navbar";
 
 
 const firebaseConfig = {
@@ -13,4 +16,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
+export const auth = getAuth (app);
+export const GoogleProvider = new GoogleAuthProvider ();

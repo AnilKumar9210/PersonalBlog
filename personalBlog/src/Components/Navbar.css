@@ -33,7 +33,7 @@ nav>li {
     padding: 4px;
     transition: all ease-in 0.1s;
     /* font-weight: bold; */
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1); */
 }
 
 nav>li>button {
@@ -50,7 +50,12 @@ nav>li>button:hover {
     padding: 4px;
     transition: all ease-in 0.1s;
     cursor: pointer;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1); */
     font-size: 17px;
 
+}
+
+.profile {
+    width: auto;
+    height: inherit;
 }
