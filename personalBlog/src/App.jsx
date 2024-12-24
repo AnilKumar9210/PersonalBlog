@@ -29,6 +29,9 @@ function App() {
         <Route path="/About" element={<About/>}/>
       </Routes>
     </Router>
+    <div className="backGroundDisplay">
+      <img src="./assets/traveling.webp" alt="" />
+    </div>
 
     </>
   );
