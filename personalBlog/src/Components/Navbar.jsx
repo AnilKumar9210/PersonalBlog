@@ -39,7 +39,7 @@ const Navbar = () => {
             </Link>
         </li>
         <li>
-        <Link className='link' to="/">Home</Link>
+        <Link className='link' to="/home">Home</Link>
         <Link className='link' to="/eat">Eat</Link>
         <Link className='link' to="/travel">Travel</Link>
         <Link className='link' to="/about">About</Link>

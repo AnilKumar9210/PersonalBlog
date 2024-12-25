@@ -1,0 +1,53 @@
+.para > p {
+  font-size: 25px;
+  font-weight: 300;
+  margin: 0 auto;
+}
+
+.para {
+  display: grid;
+  margin: 20px;
+}
+
+.home {
+    width: 100%;
+
+}
+
+.background {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+}
+.background img {
+    width: 100%;
+    height: 107%;
+    object-fit: contain;
+    position: absolute;
+}
+.background .text {
+    position: relative;
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text :nth-child(1) {
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.text :nth-child(2) {
+    font-size: 70px;
+    font-weight: 600;
+}
+
+.text :nth-child(3) {
+    font-size: 25px;
+    font-weight: 300;
+}
