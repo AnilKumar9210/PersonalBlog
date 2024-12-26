@@ -13,6 +13,8 @@ import Travel from "./Components/Travel";
 import About from "./Components/About";
 import Profile from "./Components/Profile";
 import Home from "./Components/Home";
+import Work from "./Components/Work";
+import Post from "./DataFiles/Post";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -39,6 +41,7 @@ function App() {
           {/* <Route path="/" /> */}
           <Route path="/" element={<Navigate to="/home"/>}/>
           <Route path="/profile" element={<profile />} />
+          <Route path="/work" element={<Work />} />
           <Route path="/home" element={<Home/>}/>
           <Route path="/Eat" element={<Eat />} />
           <Route path="/Travel" element={<Travel />} />
@@ -47,6 +50,7 @@ function App() {
       </Router>
       {/* <div className="backGroundDisplay">
     </div> */}
+    <Post/>
     </>
   );
 }
