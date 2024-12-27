@@ -1,0 +1,123 @@
+.create {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  flex-flow: column;
+}
+
+.setProfile {
+  width: 600px;
+  height: 400px;
+  /* border: 2px solid black; */
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3),
+              0 -4px 10px rgba(0, 0, 0, 0.3),
+              4px 0 10px rgba(0, 0, 0, 0.3),
+              -4px 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 9px; 
+}
+
+.mainData {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.mainData input[type="file"] {
+  width: 110px;
+  top: 10px;
+  height: 30px;
+  position: absolute;
+  display: inline-block;
+  opacity: 0;
+}
+
+.mainData span {
+  position: relative;
+}
+
+.mainData span button {
+  width: 105px;
+  height: 40px;
+  padding: 10px 20px;
+  background-color: #c7c7c7;
+  color: #4e3a3a;
+  border: none;
+  border-radius: 9px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.UserName {
+  width: 50%;
+  max-width: 600px;
+  height: 20px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1.5px solid lightgrey;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.UserName:hover {
+  border: 2px solid lightgrey;
+  box-shadow: 0px 0px 20px -17px;
+}
+
+.UserName:active {
+  transform: scale(0.95);
+}
+
+.UserName:focus {
+  border: 2px solid grey;
+}
+
+.desc {
+  width: 72%;
+  max-width: 90%;
+  height: 62px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1.5px solid lightgrey;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.desc:hover {
+  border: 2px solid lightgrey;
+  box-shadow: 0px 0px 20px -17px;
+}
+
+.desc:active {
+  transform: scale(0.95);
+}
+
+.desc:focus {
+  border: 2px solid grey;
+}
+
+.saveData {
+  width: 105px;
+  height: 40px;
+  padding: 10px 20px;
+  background-color: #c7c7c7;
+  color: #4e3a3a;
+  border: none;
+  border-radius: 9px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

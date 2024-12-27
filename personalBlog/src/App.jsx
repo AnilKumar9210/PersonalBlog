@@ -15,6 +15,7 @@ import Profile from "./Components/Profile";
 import Home from "./Components/Home";
 import Work from "./Components/Work";
 import Post from "./DataFiles/Post";
+import CreateProfile from "./DataFiles/CreateProfile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -46,11 +47,9 @@ function App() {
           <Route path="/Eat" element={<Eat />} />
           <Route path="/Travel" element={<Travel />} />
           <Route path="/About" element={<About />} />
+          <Route path="/creat-post" element={<Post/>} />
         </Routes>
       </Router>
-      {/* <div className="backGroundDisplay">
-    </div> */}
-    <Post/>
     </>
   );
 }

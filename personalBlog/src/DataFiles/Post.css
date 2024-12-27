@@ -10,7 +10,6 @@
   display: inline-block;
   position: relative;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .file-upload input[type="file"] {
@@ -24,7 +23,8 @@
 }
 
 .file-upload button {
-  width: 130px;
+  width: 140px;
+  height: 50px;
   padding: 10px 20px;
   background-color: #c7c7c7;
   color: #4e3a3a;
@@ -51,17 +51,119 @@
 }
 
 .titleSec input {
-    width: 350px;
-    height: 40px;
-    padding: 4px;
-    border-radius: 4px;
-    border: 2px solid black;
+  width: 600px;
+  height: 40px;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.blog textarea {
+  border-radius: 4px;
+  width: 1491px;
+  height: 417px;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.publish {
+  width: 130px;
+  padding: 10px 20px;
+  background-color: #c7c7c7;
+  color: #4e3a3a;
+  border: none;
+  border-radius: 9px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.post h1 {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
+  font-weight: 300;
 }
 
 
-.blog textarea {
-    border: 2px solid black;
-    border-radius: 4px;
-    width:98%;
-    height: 140px;
+.input {
+  width: 100%;
+  max-width: 600px;
+  height: 45px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1.5px solid lightgrey;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.input:hover {
+  border: 2px solid lightgrey;
+  box-shadow: 0px 0px 20px -17px;
+}
+
+.input:active {
+  transform: scale(0.95);
+}
+
+.input:focus {
+  border: 2px solid grey;
+}
+
+.content {
+  width: 100%;
+  max-width: 1420px;
+  height: 45px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1.5px solid lightgrey;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.content:hover {
+  border: 2px solid lightgrey;
+  box-shadow: 0px 0px 20px -17px;
+}
+
+.content:active {
+  transform: scale(0.95);
+}
+
+.content:focus {
+  border: 2px solid grey;
+}
+
+.sucess {
+  display: none;
+  position: absolute;
+  margin-top: 140px;
+  right: 100px;
+  width: 205px;
+  height: 48px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  box-shadow:
+  7.2px 6.6px 4.5px rgba(0, 0, 0, 0.09),
+  16.8px 15.4px 12.5px rgba(0, 0, 0, 0.084),
+  34.6px 31.7px 30.1px rgba(0, 0, 0, 0.075),
+  107px 98px 100px rgba(0, 0, 0, 0.062);
+  top: 0px;
+}
+
+.sucess span {
+  background-color: beige;
+}
+
+.sucess button {
+  cursor: pointer;
 }
