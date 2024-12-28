@@ -1,56 +1,53 @@
-
 nav {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    position: relative;
-    font-size: large;
-    background-color: #e4e4e4;
-    height: 40px;
-    align-items: center;
-    font-family: "Host Grotesk", serif;
-    justify-content: space-between;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  position: relative;
+  font-size: large;
+  background-color: #e4e4e4;
+  height: 40px;
+  align-items: center;
+  font-family: "Host Grotesk", serif;
+  justify-content: space-between;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
 }
-nav>li {
-    list-style-type: none;
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    position: relative;
-    font-size: large;
+nav > li {
+  list-style-type: none;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  position: relative;
+  font-size: large;
 }
-.link{
-    text-decoration: none;
-    padding: 3px;
-    border-radius: 16px;
-    width: 57px;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 100;
-}
-
-
-nav>li>button {
-    border: none;
-    height: 33px;
-    width: 72px;
-    border-radius: 16px;
-    background: transparent;
-    color: #6d4e7c;
-    font-size: 16px;
+.link {
+  text-decoration: none;
+  padding: 3px;
+  border-radius: 16px;
+  width: 57px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 100;
 }
 
-nav>li>button:hover {
-    padding: 4px;
-    transition: all ease-in 0.1s;
-    cursor: pointer;
-    /* box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1); */
-    font-size: 17px;
-
+nav > li > button {
+  border: none;
+  height: 33px;
+  width: 72px;
+  border-radius: 16px;
+  background: transparent;
+  color: #6d4e7c;
+  font-size: 16px;
 }
 
-.profile {
-    width: auto;
-    height: inherit;
+nav > li > button:hover {
+  padding: 4px;
+  transition: all ease-in 0.1s;
+  cursor: pointer;
+  /* box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1); */
+  font-size: 17px;
+}
+
+.img {
+  width: auto;
+  height: inherit;
 }

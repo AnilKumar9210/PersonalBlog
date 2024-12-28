@@ -3,6 +3,7 @@ import { getAnalytics } from "firebase/analytics";
 import { GoogleAuthProvider } from "firebase/auth/web-extension";
 import { getAuth } from "firebase/auth";
 import Navbar from "../Components/Navbar";
+import {getFirestore} from 'firebase/firestore'
 
 
 const firebaseConfig = {
@@ -19,3 +20,5 @@ const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 export const auth = getAuth (app);
 export const GoogleProvider = new GoogleAuthProvider ();
+
+export const db = getFirestore ()
