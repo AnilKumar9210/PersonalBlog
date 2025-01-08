@@ -23,7 +23,8 @@ import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 function App() {
   const signOutRef = useRef(null);
   const [proData, setProData] = useState(false);
-  const navigate = useNavigate ();
+  const navigate = useNavigate ()
+  
 
   const [hasAccount, setHasAccount] = useState(false);
   const [accountId, setAccountId] = useState("");
@@ -51,13 +52,16 @@ function App() {
     return <header className="title">Wander & wonder</header>;
   };
 
+
   const handleCreateBlog = ()=> {
-    if (hasAccount) {
-      navigate ("/creat-post")
-    } else {
-      navigate ("/profile")
+      console.log(hasAccount)
+      if (hasAccount) {
+        navigate ('/create-post')
+      } else {
+        navigate ('/profile')
+      }
     }
-  }
+  
 
   useEffect(() => {}, [signOutRef]);
 
@@ -76,15 +80,17 @@ function App() {
 
   const CreateBlog = ()=>{
     return <button className="createBlog" onClick={handleCreateBlog}>
-      <div className="sign">+</div>
-      <div className="text">Create</div>
+    <div className="sign">+</div>
+    <div className="text">Create</div>
   </button>
   }
+
+  
 
   return (
     <>
       <Title />
-      <Router>
+      {/* <Router> */}
         <Navbar
           props={{
             signOutRef: signOutRef,
@@ -93,7 +99,6 @@ function App() {
           }}
         />
         <Routes>
-          {/* <Route path="/" /> */}
           <Route path="/" element={<Navigate to="/home" />} />
           <Route
             path="/profile"
@@ -106,7 +111,6 @@ function App() {
           <Route path="/About" element={<About />} />
           <Route path="/creat-post" element={<Post />} />
         </Routes>
-      </Router>
       <SignOutPopup />
       <CreateBlog/>
     </>

@@ -1,20 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Profile.css";
 import { db } from "../config/firebase";
-import {
-  doc,
-  updateDoc,
-  getFirestore,
-  getDoc,
-  collection,
-  getDocs,
-} from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
+import { doc, updateDoc } from "firebase/firestore";
 
 const Profile = (props) => {
   const createRef = useRef(null);
   const profileRef = useRef(null);
-  const [userName,setUserName] = useState ("");
-  const [password,setPassword] = useState ("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState([{}]);
 
   const handleSave = async () => {
     // console.log(props.proData)
@@ -31,6 +26,15 @@ const Profile = (props) => {
     createRef.current.style.display = "none";
     profileRef.current.style.display = "block";
     console.log(props.accountId, props.hasAccount);
+    setUserData([
+      ...userData,
+      {
+        name: userName,
+        pass: password,
+        account: props.hasAccount,
+        id: uuidv4(),
+      },
+    ]);
   };
 
   const LoginPageComp = () => {
@@ -39,9 +43,25 @@ const Profile = (props) => {
         <div className="profileData">
           <img src="./assets/user.png" alt="error" />
           <h3>Anil Kumar</h3>
+          {userData.map((info) => {
+            return (
+              <div key={info.id} className="userData">
+                <div className="userName">{info.name}</div>
+                <div className="pass">{info.pass}</div>
+                <div className="acc">{info.account}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     );
+  };
+
+  const handleUserPass = (e) => {
+    setPassword(e.target.value);
+  };
+  const handleUserName = (e) => {
+    setUserName(e.target.value);
   };
 
   const UserProfileComp = () => {
@@ -54,11 +74,23 @@ const Profile = (props) => {
               <input type="file" />
               <button>↑ Upload</button>
             </span>
-            <input className="UserName" type="text" placeholder="Username" minLength='4'
-             onChange={(e)=>setUserName (e.target.value)}/>
+            <input
+              className="UserName"
+              type="text"
+              placeholder="Username"
+              value={userData.name}
+              onChange={() => handleUserName}
+              autoFocus
+            />
           </div>
-          <input className="desc" type="text" placeholder="description" minLength='10' 
-          onChange={(e)=>setPassword (e.target.value)}/>
+          <input
+            className="desc"
+            type="text"
+            placeholder="description"
+            value={userData.pass}
+            onChange={() => handleUserPass}
+           
+          />
           <button className="saveData" onClick={handleSave}>
             Save
           </button>
