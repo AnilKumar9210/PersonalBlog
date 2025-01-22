@@ -1,0 +1,40 @@
+.About-Section {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    flex-flow: column;
+}
+
+.AboutMe {
+    position: relative;
+    width: 50%;
+}
+
+.about-desc {
+    display: flex;
+    position: relative;
+    width: 55%;
+    gap: 20px;
+}
+
+.photo {
+    position: relative;
+    width: 45%;
+    height: 600px;
+    overflow: hidden;
+    margin-top: 22px;
+}
+
+.photo img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.About-Section h1 {
+    margin: 36px 0 10px 0;
+    left: 0;
+    width: 55%;
+    position: relative;
+}

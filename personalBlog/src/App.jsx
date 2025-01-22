@@ -63,7 +63,9 @@ function App() {
     }
   
 
-  useEffect(() => {}, [signOutRef]);
+  useEffect(() => {
+    handleCreateBlog ()
+  }, [signOutRef,hasAccount]);
 
   const SignOutPopup = () => {
     return (
@@ -109,7 +111,7 @@ function App() {
           <Route path="/Eat" element={<Eat />} />
           <Route path="/Travel" element={<Travel />} />
           <Route path="/About" element={<About />} />
-          <Route path="/creat-post" element={<Post />} />
+          <Route path="/create-post" element={<Post />} />
         </Routes>
       <SignOutPopup />
       <CreateBlog/>
