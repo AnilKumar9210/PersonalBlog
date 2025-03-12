@@ -26,24 +26,20 @@ function App() {
   const navigate = useNavigate ()
   
 
-  const [hasAccount, setHasAccount] = useState(false);
   const [accountId, setAccountId] = useState("");
-  const [accDetails, setAccDetails] = useState({});
+  const [accDetails, setAccDetails] = useState([]);
 
   useEffect(() => {
     async function getProfile() {
       const userRef = collection(db, "HasProfile");
-      const fetchData = await getDocs(userRef);
-      fetchData.forEach((doc) => {
-        const aid = doc.id;
-
-        setAccountId(doc.id);
-        console.log(accountId)
-        const data = doc.data();
-        if (data.hasProfile != undefined) {
-          setHasAccount(data.hasProfile);
-        }
-      });
+      const fetchData = await getDocs (userRef);
+      const userDetails = fetchData.docs.map (doc=>({
+        id:doc.id,
+        ...doc.data ()
+      }));
+      accDetails.push (userDetails[0])
+      console.log(typeof accDetails[0].description,"ehlo")
+      
     }
     getProfile();
   }, []);
@@ -54,8 +50,8 @@ function App() {
 
 
   const handleCreateBlog = ()=> {
-      console.log(hasAccount)
-      if (hasAccount) {
+      // console.log(hasAccount)
+      if (accDetails[0].hasAccount) {
         navigate ('/create-post')
       } else {
         navigate ('/profile')
@@ -63,9 +59,9 @@ function App() {
     }
   
 
-  useEffect(() => {
-    handleCreateBlog ()
-  }, [signOutRef,hasAccount]);
+  // useEffect(() => {
+  //   handleCreateBlog ()
+  // }, [signOutRef,accDetails]);
 
   const SignOutPopup = () => {
     return (
@@ -104,7 +100,7 @@ function App() {
           <Route path="/" element={<Navigate to="/home" />} />
           <Route
             path="/profile"
-            element={<Profile accountId={accountId} hasAccount={hasAccount} setHasAccount={setHasAccount} />}
+            element={<Profile />}
           />
           <Route path="/work" element={<Work />} />
           <Route path="/home" element={<Home />} />
