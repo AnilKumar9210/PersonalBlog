@@ -24,9 +24,6 @@ function App() {
   const signOutRef = useRef(null);
   const [proData, setProData] = useState(false);
   const navigate = useNavigate ()
-  
-
-  const [accountId, setAccountId] = useState("");
   const [accDetails, setAccDetails] = useState([]);
 
   useEffect(() => {

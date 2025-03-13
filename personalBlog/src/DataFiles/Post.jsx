@@ -28,6 +28,7 @@ const Post = () => {
   return (
     <div className="post">
       <h1>Share Your Experience</h1>
+      <div className="containerBox">
       <div className="file-upload flex">
         <span>Image : </span>
         <button>Upload Image</button>
@@ -41,10 +42,10 @@ const Post = () => {
         <span>Share your Experience : </span>
         <textarea className="content" type="text" name="content" />
       </div>
+    </div>
       <div className="btn">
         <button className="publish" onClick={handlePublish}>Publish</button>
       </div>
-
       <Sucessful />
     </div>
   );

@@ -77,9 +77,9 @@
   transform: scale(0.95);
 }
 
-.UserName:focus {
+/* .UserName:focus {
   border: 2px solid grey;
-}
+} */
 
 .desc {
   width: 72%;
@@ -101,10 +101,10 @@
 .desc:active {
   transform: scale(0.95);
 }
-
+/* 
 .desc:focus {
   border: 2px solid grey;
-}
+} */
 
 .saveData {
   width: 105px;
@@ -120,9 +120,10 @@
 }
 
 /* profile section */
+/* user profile  */
 .profile {
   width: inherit;
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }
 
 .userProfile {
@@ -135,8 +136,40 @@
 
 .profileData {
   display: flex;
-  align-items: center;
-  gap: 30px;
+  flex-flow: column;
+  flex-wrap: wrap;
+  /* align-items: center; */
+  /* gap: 30px; */
   position: relative;
   margin-left: 35px;
+}
+
+.profileName {
+  display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1;
+    font-size: larger;
+    height: 70px;
+    padding: 10px;
+    /* border: 2px solid black; */
+}
+
+.userData {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  position: relative;
+  margin-left: 35px;
+  margin-top: 20px;
+}
+
+.profileName img {
+  width: 70px;
+  object-fit: contain;
+}
+
+.profileName span {
+  font-size: 46px;
+  font-weight: 400
 }
