@@ -1,9 +1,10 @@
 import React from 'react'
+import Blog from '../DataFiles/Blog'
 
 const Travel = () => {
   return (
     <div>
-      Trave
+      <Blog/>
     </div>
   )
 }

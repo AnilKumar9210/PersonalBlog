@@ -1,16 +1,35 @@
-import React,{useRef} from "react";
+import React,{useRef, useState} from "react";
 import "./Post.css";
 
 const Post = () => {
 
   const sucessRef = useRef (null);
+  const [title,setTitle] = useState ("");
+  const [blog,setBlog] = useState ("");
+  const [image,setImage] = useState (null);
+  const [imageUrl,setImageUrl] = useState ("");
 
   const handleSucess = ()=> {
     sucessRef.current.style.display = 'none';
   };
 
-  const handlePublish = ()=> {
+  const handlePublish = async ()=> {
     sucessRef.current.style.display = 'block';
+    // const storageRef = ref (storage,`images/${image.name}`);
+    // try {
+    //   await uploadBytes (storageRef,image);
+    //   const url = await getDownloadURL (storageRef);
+    //   setImageUrl (url);
+    //   console.log('Upload successful',url);
+    // } catch (err) {
+    //   console.log("upload failed :",err)
+    // }
+  };
+
+  const handleImage = (e)=> {
+    if (e.target.files[0]) {
+      setImage (e.target.files[0]);
+    }
   }
 
 
@@ -36,11 +55,11 @@ const Post = () => {
       </div>
       <div className="titleSec flex">
         <span>Title : </span>
-        <input className="input" type="text" name="title" />
+        <input className="input" type="text" name="title" onChange={(e)=> setTitle (e.target.value)} />
       </div>
       <div className="blog flex">
         <span>Share your Experience : </span>
-        <textarea className="content" type="text" name="content" />
+        <textarea className="content" type="text" name="content" onChange={(e)=> setBlog (e.target.value)}/>
       </div>
     </div>
       <div className="btn">

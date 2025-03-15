@@ -4,6 +4,7 @@ import { GoogleAuthProvider } from "firebase/auth/web-extension";
 import { getAuth } from "firebase/auth";
 import Navbar from "../Components/Navbar";
 import {getFirestore} from 'firebase/firestore'
+import {getStorage}from 'firebase/storage'
 
 
 const firebaseConfig = {
