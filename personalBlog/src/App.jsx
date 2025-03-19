@@ -25,6 +25,8 @@ function App() {
   const [proData, setProData] = useState(false);
   const navigate = useNavigate ()
   const [accDetails, setAccDetails] = useState([]);
+  const [title,setTitle] = useState ("");
+    const [content,setContent] = useState ("");
 
   useEffect(() => {
     async function getProfile() {
