@@ -8,7 +8,7 @@ import { Form, useFetcher } from "react-router-dom";
 const Profile = () => {
   const createRef = useRef(null);
   const profileRef = useRef(null);
-  const [accDetails, setAccDetails] = useState([]);
+  const [accDetails, setAccDetails] = useState([{description : "",userNmae : "",hasAccount:false}]);
   const [userName, setUserName] = useState("");
   const [desc, setDesc] = useState("");
   const [id, setId] = useState("");
@@ -27,7 +27,7 @@ const Profile = () => {
       setAccDetails([userDetails[0]]);
       console.log(typeof accDetails,accDetails)
       setBool (userDetails[0].hasAccount);
-      // console.log(accDetails[0]);
+      console.log(accDetails[0]);
     }
     getProfile();
   }, []);
@@ -35,10 +35,10 @@ const Profile = () => {
   //updating user details in database
   const handleSave = async () => {
     // console.log(desc)
-    if (accDetails.length === 0 ) {
-      alert ("please enter login details first");
-      return;
-    }
+    // if (accDetails.length === 0 ) {
+    //   alert ("please enter login details first");
+    //   return;
+    // }
     accDetails[0].description = desc;
     accDetails[0].userName = userName;
     accDetails[0].hasAccount = true;
@@ -96,8 +96,8 @@ const Profile = () => {
               type="text"
               placeholder="Username"
               value={userName}
-              // onChange={(e)=> {setUserName (e.target.value)}}
-              onChange={handleUserName}
+              onChange={(e)=> {setUserName (e.target.value)}}
+              // onChange={handleUserName}
               autoFocus
             />
           </div>
@@ -106,8 +106,8 @@ const Profile = () => {
             type="text"
             placeholder="description"
             value={desc}
-            // onChange={(e)=> {setDesc (e.target.value)}}
-            onChange={handleDesc}
+            onChange={(e)=> {setDesc (e.target.value)}}
+            // onChange={handleDesc}
             autoFocus
           />
           <button className="saveData" onClick={handleSave}>

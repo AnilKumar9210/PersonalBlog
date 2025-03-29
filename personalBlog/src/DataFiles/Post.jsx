@@ -13,6 +13,7 @@ const Post = () => {
   const [imageUrl,setImageUrl] = useState ("");
   const [keys,setKeys] = useState ([]);
   const [Id,setId] = useState ("");
+  const [heading,setHeading] = useState ("");
 
   useEffect (()=> {
     async function getData () {
@@ -20,6 +21,10 @@ const Post = () => {
     const data = await getDocs (coll);
     const id = data.docs.map ((doc)=> ({id:doc.id}));
     setId (id[0].id);
+
+    // const userData = await getDocs (collection (db,"HasProfile"));
+    // const userName = userData.docs.map ((doc)=>(doc.userName))
+    // console.log(userName)
     };
     getData ();
   },[]);
@@ -41,11 +46,21 @@ const Post = () => {
     sucessRef.current.style.display = 'block';
     const user = auth.currentUser;
     
-    const storageRef = doc (db,"Blog",Id);
-    await updateDoc (storageRef, {title,content})
-    .then (()=>console.log("updated successfully"))
-    .catch ((err)=> console.log("Error : ",err));
-
+    // const storageRef = doc (db,"Blog",Id);
+    // await addDoc (storageRef, {title,content})
+    // .then (()=>console.log("updated successfully"))
+    // .catch ((err)=> console.log("Error : ",err));
+    try {
+      await addDoc (collection (db,"Blog"), {
+        content:content,
+        title:title,
+        heading:heading
+      });
+      console.log("update sucessfully");
+    }catch (err) {
+      console.log("error :",err);
+    }
+ 
     setTitle ("");
     setContent ("");
     // const pair = Math.floor(1000 + Math.random() * 9000);
@@ -67,6 +82,7 @@ const Post = () => {
     // }
     // console.log(url);
   // }
+    
   };
 
   const handleImage = (e)=> {
@@ -98,14 +114,25 @@ const Post = () => {
         <button>Upload Image</button>
         <input type="file" onChange={handleImage}/>
       </div>
-      <div className="titleSec flex">
-        <span>Title : </span>
-        <input className="input" 
-        type="text" 
-        name="title" 
-        value={title} 
-        onChange={(e)=> setTitle (e.target.value)} 
-        />
+      <div className="box">
+        <div className="titleSec flex">
+          <span>Title : </span>
+          <input className="input" 
+          type="text" 
+          name="title" 
+          value={title} 
+          onChange={(e)=> setTitle (e.target.value)} 
+          />
+        </div>
+        <div className="titleSec flex">
+          <span>Heading : </span>
+          <input className="input" 
+          type="text" 
+          name="Heading" 
+          value={heading} 
+          onChange={(e)=> setHeading (e.target.value)} 
+          />
+        </div>
       </div>
       <div className="blog flex">
         <span>Share your Experience : </span>

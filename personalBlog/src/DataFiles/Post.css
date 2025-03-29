@@ -9,7 +9,7 @@
 
 .containerBox {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    grid-template-columns: 1fr; /* Two equal columns */
     grid-template-rows: auto auto auto; /* Title in first row, two sections in second, button in third */
     gap: 20px;
     margin-top: 20px;
@@ -76,6 +76,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 15px 0;
 }
 
 .publish {

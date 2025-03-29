@@ -40,7 +40,7 @@ const Navbar = (props) => {
     <nav>
       <li>
         <Link className="link img" to='/profile'>
-          <img  src="./assets/profilImg.png" alt="text" />
+          <img  src="src/assets/user.png" alt="text" />
         </Link>
       </li>
       <li>

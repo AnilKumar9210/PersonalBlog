@@ -38,7 +38,6 @@ function App() {
       }));
       accDetails.push (userDetails[0])
       console.log(typeof accDetails[0].description,"ehlo")
-      
     }
     getProfile();
   }, []);
