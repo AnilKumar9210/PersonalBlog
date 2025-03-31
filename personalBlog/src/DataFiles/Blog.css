@@ -9,11 +9,12 @@ article {
   display: flex;
   gap: 10px;
   align-items: center;
+  justify-content: flex-start;
 }
 
 .postUserInfo :nth-child(1) {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 .postUserInfo :nth-child(1) img {
   object-fit: contain;
@@ -31,10 +32,9 @@ article {
 
 .postInfo :nth-child(1) {
   font-size: 55px;
-  font-weight: 300;
-  margin: 13px 0;
+  font-weight: 500;
+  font-style: italic;
   text-size-adjust: 100%;
-  
 }
 
 .postInfo :nth-child(2) {
@@ -49,6 +49,8 @@ article {
   position: relative;
   width: 98%;
   margin: 23px 0;
+  display: flex;
+  justify-content: center;
 }
 
 .postImg img {
@@ -83,7 +85,7 @@ article {
 }
 
 .margin-top {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .react {
@@ -108,123 +110,124 @@ article {
 }
 
 .arrange :nth-child(1) {
-    cursor:pointer;
+  cursor: pointer;
+  background: none;
+  border: none;
 }
 
 /* Comments Section */
 
 .comments {
-    width: 80%;
-    margin: 10px auto;
-    display: flex;
-    flex-flow: column;
-    gap: 13px;
+  width: 80%;
+  margin: 10px auto;
+  display: flex;
+  flex-flow: column;
+  gap: 13px;
 }
 
 .heading {
-    font-size:40px;
-    font-weight: 300;
+  font-size: 34px;
+  font-weight: 300;
 }
 
 .write textarea {
-    width: 650px;
-    padding: 10px;
-    height: 65px;
+  width: 650px;
+  padding: 10px;
+  height: 65px;
 }
 
 .write {
-    position: relative;
-    height: 135px;
+  position: relative;
+  height: 135px;
 }
 
 .write button {
-    position: absolute;
-    right: 35px;
-    bottom: 4px;
+  position: absolute;
+  right: 35px;
+  bottom: 4px;
 }
 
-/* From Uiverse.io by vinodjangid07 */ 
+/* From Uiverse.io by vinodjangid07 */
 .publishBtn {
-    width: 130px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(15, 15, 15);
-    border: none;
-    color: white;
-    font-weight: 600;
-    gap: 8px;
-    cursor: pointer;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
-    position: relative;
-    overflow: hidden;
-    transition-duration: .3s;
-  }
-  
-  .svgIcon {
-    width: 16px;
-  }
-  
-  .svgIcon path {
-    fill: white;
-  }
-  
-  .publishBtn::before {
-    width: 130px;
-    height: 130px;
-    position: absolute;
-    content: "";
-    background-color: white;
-    border-radius: 50%;
-    left: -100%;
-    top: 0;
-    transition-duration: .3s;
-    mix-blend-mode: difference;
-  }
-  
-  .publishBtn:hover::before {
-    transition-duration: .3s;
-    transform: translate(100%,-50%);
-    border-radius: 0;
-  }
-  
-  .publishBtn:active {
-    transform: translate(5px,5px);
-    transition-duration: .3s;
-  }
+  width: 130px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(15, 15, 15);
+  border: none;
+  color: white;
+  font-weight: 600;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
+  position: relative;
+  overflow: hidden;
+  transition-duration: 0.3s;
+}
 
-  /*comments list */
-  .opinions {
-    position: relative;
-    width: 60%;
-    padding: 10px;
-    background-color: #efefef;
-    border-radius: 10px;
-    display: flex;
-    flex-flow: column;
-    gap: 10px;
-  }
+.svgIcon {
+  width: 16px;
+}
 
-  .cmtUsers {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    position: relative;
-    width: 100%;
-  }
+.svgIcon path {
+  fill: white;
+}
 
+.publishBtn::before {
+  width: 130px;
+  height: 130px;
+  position: absolute;
+  content: "";
+  background-color: white;
+  border-radius: 50%;
+  left: -100%;
+  top: 0;
+  transition-duration: 0.3s;
+  mix-blend-mode: difference;
+}
 
-  .cmtUsers:nth-child(1) img {
-    object-fit: contain;
-    width: 30px;
-  }
+.publishBtn:hover::before {
+  transition-duration: 0.3s;
+  transform: translate(100%, -50%);
+  border-radius: 0;
+}
 
-  .cmtContent {
-    margin: 0 40px;
-  }
+.publishBtn:active {
+  transform: translate(5px, 5px);
+  transition-duration: 0.3s;
+}
 
-  .error {
-    color: red;
-    display: none;
-  }
+/*comments list */
+.opinions {
+  position: relative;
+  width: 60%;
+  padding: 10px;
+  background-color: #efefef;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+
+.cmtUsers {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.cmtUsers:nth-child(1) img {
+  object-fit: contain;
+  width: 30px;
+}
+
+.cmtContent {
+  margin: 0 40px;
+}
+
+.error {
+  color: red;
+  display: none;
+}

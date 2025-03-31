@@ -113,11 +113,11 @@ const Blog = () => {
         </div>
       <div className="react">
         <div className="like arrange">
-          <span onClick={handleLikes}><img src="/src/assets/thumbs-up.svg" alt="" /></span>
+          <button onClick={handleLikes}><img src="/src/assets/thumbs-up.svg" alt="" /></button>
           <span className="likeCounter">{likeCounter}</span>
         </div>
         <div className="dislike arrange">
-          <span onClick={handleDislikes}><img src="/src/assets/thumbs-down.svg" alt="" /></span>
+          <button onClick={handleDislikes}><img src="/src/assets/thumbs-down.svg" alt="" /></button>
           <span className="dislikeCounter">{dislike}</span>
         </div>
       </div>

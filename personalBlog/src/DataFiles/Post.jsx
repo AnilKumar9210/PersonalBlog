@@ -14,6 +14,7 @@ const Post = () => {
   const [keys,setKeys] = useState ([]);
   const [Id,setId] = useState ("");
   const [heading,setHeading] = useState ("");
+  const [category,setCategory] = useState ("choose");
 
   useEffect (()=> {
     async function getData () {
@@ -43,53 +44,37 @@ const Post = () => {
       alert ("Enter a valid content");
       return;
     }
-    sucessRef.current.style.display = 'block';
+
     const user = auth.currentUser;
     
     // const storageRef = doc (db,"Blog",Id);
     // await addDoc (storageRef, {title,content})
     // .then (()=>console.log("updated successfully"))
     // .catch ((err)=> console.log("Error : ",err));
+    
+    // const storageRef = ref(storage, `images/${Date.now()}-${image.name}`);
     try {
+      // await uploadBytes (storageRef,image)
+      // const downloadUrl = await getDownloadURL (storageRef);
+      // console.log(downloadUrl,"Hello world") 
       await addDoc (collection (db,"Blog"), {
         content:content,
         title:title,
-        heading:heading
+        heading:heading,
+        category:category,
       });
+      console.log(category)
+      sucessRef.current.style.display = 'block';
       console.log("update sucessfully");
     }catch (err) {
       console.log("error :",err);
     }
- 
     setTitle ("");
     setContent ("");
-    // const pair = Math.floor(1000 + Math.random() * 9000);
-    // localStorage.setItem (Id,keys);
-    // if (image) {
-    //   const storageRef = ref (storage,`images/${image.name}`)
-    // try {
-    //   await uploadBytes (storageRef,image);
-    //   const url = await getDownloadURL (storageRef);
-    //   setImageUrl (url);
-
-    //   await addDoc (collection (db,"Blog"), {
-    //     imageUrl:url
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // } else {
-    //   await uploadBytes (storageRef,)
-    // }
-    // console.log(url);
-  // }
     
   };
 
-  const handleImage = (e)=> {
-    if (e.target.files[0]) {
-      setImage (e.target.files[0]);
-    }
-  }
+  
 
 
   const Sucessful = () => {
@@ -112,7 +97,16 @@ const Post = () => {
       <div className="file-upload flex">
         <span>Image : </span>
         <button>Upload Image</button>
-        <input type="file" onChange={handleImage}/>
+        <input type="file" onChange={(e)=> (setImage (e.target.files[0]))}/>
+      </div>
+      <div className="categorySec">
+        <h3>Choose category :</h3>
+        <select name="" id="" value={category} onChange={(e)=> (setCategory (e.target.value))} className="category">
+        {/* <option value="">Choose category</option> */}
+        <option value="travel">travel</option>
+        <option value="work">work</option>
+        <option value="eat">eat</option>
+        </select>
       </div>
       <div className="box">
         <div className="titleSec flex">
