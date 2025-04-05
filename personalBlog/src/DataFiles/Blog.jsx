@@ -1,43 +1,88 @@
 import React, { useRef, useState } from 'react'
 import './Blog.css'
+import { db } from "../config/firebase";
+import { collection, getDocs, updateDoc,doc , increment } from "firebase/firestore";
+import { useNavigate } from "react-router-dom"; 
 
-const Blog = () => {
-  const [likeCounter,setLikeCounter] = useState (0);
-  const [dislike,setDislike] = useState (0);
-  const [liked,setLiked] = useState(false);
-  const [disliked,setDisliked] = useState(false);
+const Blog = ({blogData}) => {
+  const [likeCounter,setLikeCounter] = useState ({});
+  const [dislike,setDislike] = useState ({});
+  const [liked,setLiked] = useState({});
+  const [disliked,setDisliked] = useState({});
   const [comment,setComment] = useState ("");
   const [cmtList,setCmtList] = useState ([]);
-  const textRef = useRef (null);
+  const commentRef = useRef (null);
   const errorRef = useRef (null);
+  // const usrData = useState ({...blogData})
 
-  const handleLikes = ()=> {
-    if (liked) {
-      setLikeCounter (prev=>prev-1);
-      setLiked(false);
-    } else {
-      setLikeCounter (prev=> prev+1);
-      setLiked (true);
-      if (disliked) {
-        setDislike (prev=>prev-1);
-        setDisliked (false);
-      }
+  const toggleComment = ()=> {
+    if (commentRef.current) {
+      commentRef.current.classList.toggle ("showComment")
     }
-  };
+  }
 
-  const handleDislikes = ()=> {
-    if (disliked) {
-      setDislike (prev=>prev-1);
-      setDisliked (false);
-    } else {
-      setDislike (prev=>prev+1);
-      setDisliked (true);
-      if (liked) {
-        setLikeCounter (prev=>prev-1);
-        setLiked (false);
+ const handleLikes = async(e) => {
+     console.log(e.currentTarget.value)
+     const postId = e.currentTarget.value;
+ 
+     if (liked[postId]) {
+       setLikeCounter((prev)=> ({...prev,[postId]: (prev[postId] || 0) - 1}));
+       setLiked ((prev)=> ({...prev,[postId]:false}));
+ 
+       await updateDoc (doc (db, "Blog", postId), {
+         likes: likeCounter[postId]-1,
+       })
+       // setLiked(false);
+     } else {
+       setLikeCounter((prev) => ({...prev,[postId]:(prev[postId] || 0) + 1}));
+       setLiked ((prev)=> ({...prev,[postId]:true}));
+       // setLiked(true);
+ 
+       await updateDoc (doc(db,"Blog",postId),{
+         likes:likeCounter[postId] + 1,
+       })
+ 
+       if (disliked[postId]) {
+         setDislike((prev) => ({...prev,[postId]:(prev[postId] || 0) -1}));
+         setDisliked((prev)=>({...prev,[postId]:false}));
+ 
+         await updateDoc (doc(db,"Blog",postId),{
+           dislikes:dislike[postId] - 1,
+         })
+       }
+     }
+   };
+
+  const handleDislikes = async(e) => {
+      console.log(e.currentTarget.value,typeof e)
+      const postId = e.currentTarget.value;
+  
+      if (disliked[postId]) {
+        setDislike ((prev)=>({...prev,[postId]:(prev[postId] || 0) - 1}));
+        setDisliked ((prev)=> ({...prev,[postId]:false}));
+  
+        await updateDoc (doc (db,"Blog",postId),{
+          dislikes:dislike[postId] - 1,
+        });
+  
+      } else {
+        setDislike((prev) =>({...prev,[postId]:(prev[postId] || 0) + 1}));
+        setDisliked ((prev)=> ({...prev,[postId]:true}));
+  
+        await updateDoc (doc (db,"Blog",postId),{
+          dislikes:dislike[postId] + 1,
+        });
+  
+        if (liked[postId]) {
+          setLikeCounter((prev)=> ({...prev,[postId]:(prev[postId] || 0) - 1}));
+          setLiked((prev)=> ({...prev,[postId]:false}));
+  
+          await updateDoc (doc (db,"Blog",postId),{
+            likes:likeCounter[postId] -1
+          })
+        }
       }
-    }
-  };
+    };
 
   // const handleCmtChange = (e)=> {
   //   setComment (e.target.value);
@@ -58,7 +103,7 @@ const Blog = () => {
   }
 
   const Comments = ()=> {
-    return <div className="comments">
+    return <div className="comments" ref={commentRef} >
       <div className="heading">Comments</div>
       <div className="line"></div>
       <div className="write">
@@ -92,33 +137,37 @@ const Blog = () => {
     <article>
       <div className="postUserInfo">
         <span><img src="/src/assets/profileImg.png" alt="profile" /></span>
-        <span>mafia madhu</span>
+        <span onClick={ ()=>(console.log(blogData.id))}>mafia madhu</span>
         <span>29 feb 2023</span>
       </div>
       <div className='postInfo'>
-        <span>The Beach</span>
-        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque amet quas illo? Repudiandae, perferendis distinctio. Reiciendis doloremque alias natus </span>
+        {console.log(blogData)}
+        <span>{blogData.title}</span>
+        <span>{blogData.heading}</span>
       </div>
       <div className="postImg">
-        <img src="https://t3.ftcdn.net/jpg/02/43/25/90/360_F_243259090_crbVsAqKF3PC2jk2eKiUwZHBPH8Q6y9Y.jpg" alt="beach" />
+        <img src={`/src/backgroundImages/${blogData.category}/${blogData.imgUrl}`} alt={`${blogData.category}`} />
       </div>
       <div className="blogContent">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente molestias quisquam, animi blanditiis totam ad, earum saepe facere velit reprehenderit debitis dicta dolor quibusdam, quam modi. Vero, a. Quaerat illum id atque quae expedita dolor autem saepe dignissimos provident voluptate quia vitae repellendus non, quidem cumque sapiente explicabo inventore! Accusamus exercitationem expedita eius quasi nisi, sed, nulla voluptas ipsum veritatis eaque ut error consequatur beatae quo provident nihil distinctio.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi blanditiis alias labore totam quisquam hic corporis vel similique at amet, dicta exercitationem recusandae, quos optio itaque explicabo molestias pariatur minus quae nam laboriosam. Nobis, exercitationem quas voluptatem nesciunt soluta, facilis ducimus, laboriosam minus dicta praesentium iure consequuntur excepturi sapiente repudiandae quis eius ut totam ea repellendus ullam. Sequi architecto assumenda dignissimos dolor ratione temporibus est optio repellendus consequatur quis?
-        lorem777
+        {blogData.content}
       </div>
       <div className='margin-top'>
         {/* <hr /> */}
         <div className="line">
         </div>
       <div className="react">
+        <div className='actions'>
         <div className="like arrange">
-          <button onClick={handleLikes}><img src="/src/assets/thumbs-up.svg" alt="" /></button>
-          <span className="likeCounter">{likeCounter}</span>
+          <button onClick={handleLikes} value={blogData.id}><img src="/src/assets/thumbs-up.svg" alt="" /></button>
+          <span className="likeCounter">{likeCounter[blogData.id] || blogData.likes}</span>
         </div>
         <div className="dislike arrange">
-          <button onClick={handleDislikes}><img src="/src/assets/thumbs-down.svg" alt="" /></button>
-          <span className="dislikeCounter">{dislike}</span>
+          <button onClick={handleDislikes} value={blogData.id}><img src="/src/assets/thumbs-down.svg" alt="" /></button>
+          <span className="dislikeCounter">{dislike[blogData.id] || blogData.dislikes}</span>
+        </div>
+        </div>
+        <div className="comment arrange">
+          <button className='cmtButton' value={blogData.id} onClick={toggleComment}><img src="/src/assets/comment.svg" alt="" /></button>
         </div>
       </div>
         <div className="line"></div>
@@ -141,7 +190,7 @@ const Blog = () => {
     <path d="M12.326 9.5H11.5C10.5572 9.5 10.0858 9.5 9.79289 9.79289C9.5 10.0858 9.5 10.5572 9.5 11.5V20C9.5 20.9428 9.5 21.4142 9.79289 21.7071C10.0858 22 10.5572 22 11.5 22H12C12.9428 22 13.4142 22 13.7071 21.7071C14 21.4142 14 20.9428 14 20L14.0001 16.5001C14.0001 14.8433 14.5281 13.5001 16.0879 13.5001C16.8677 13.5001 17.5 14.1717 17.5 15.0001V19.5001C17.5 20.4429 17.5 20.9143 17.7929 21.2072C18.0857 21.5001 18.5572 21.5001 19.5 21.5001H19.9987C20.9413 21.5001 21.4126 21.5001 21.7055 21.2073C21.9984 20.9145 21.9985 20.4432 21.9987 19.5006L22.0001 14.0002C22.0001 11.515 19.6364 9.50024 17.2968 9.50024C15.9649 9.50024 14.7767 10.1531 14.0001 11.174C14 10.5439 14 10.2289 13.8632 9.995C13.7765 9.84686 13.6531 9.72353 13.505 9.63687C13.2711 9.5 12.9561 9.5 12.326 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
 </svg></span>
         </div>
-        <span>Travel</span>
+        <span>{blogData.category}</span>
       </div>
         <div className="line"></div>
       </div>

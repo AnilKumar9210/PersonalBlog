@@ -12,6 +12,7 @@ const Template = () => {
   const [liked, setLiked] = useState({});
   const [disliked, setDisliked] = useState({});
   const navigate = useNavigate ();
+  const bgImages = useState (['image1.jpg','image2.jpg','image3.jpg','image4.jpg','image5.jpg','image6.jpg','image7.jpg','image8.jpg','image9.jpg','image10.jpg',])
 
   useEffect(() => {
     async function getData() {
@@ -39,6 +40,9 @@ const Template = () => {
       // setLiked ((prev)=> ({...prev,[blogData.id]: (blogData.likes !== 0 ? true : false)}));
       // setDislike ((prev)=> ({...prev,[blogData.id]: (blogData.dislikes)}));
       // setDisliked ((prev)=> ({...prev,[blogData.id]: (blogData.dislikes !== 0 ? true : false)}));
+      // const index = Math.floor (Math.random () * 11);
+
+      // console.log(index)
     }
     getData();
   }, []);
@@ -108,7 +112,10 @@ const Template = () => {
 
   const handleNavigate = (id)=> {
     const data = blogData.filter ((doc)=>( doc.id === id));
-    navigate ('')
+    console.log(data)
+    navigate ('/FullBlog',{
+      state:data
+    })
     console.log(data)
   }
 
@@ -130,13 +137,14 @@ const Template = () => {
               <span >{item.heading}</span>
             </div>
             <div className="postImg">
-              <img src="/src/assets/default.jpg" alt="beach" />
+              <img src={`/src/backgroundImages/${item.category}/${item.imgUrl}`} alt="beach" />
             </div>
             <div className="blogContent">
               {item.content.slice (0,200)}....
               <div className="broadLine"></div>
             </div>
             <div className="react">
+            <div className="actions">
               <div className="like arrange">
                 <button value={item.id} onClick={handleLikes}>
                   <img src="/src/assets/thumbs-up.svg" alt="likes" />
@@ -149,6 +157,10 @@ const Template = () => {
                 </button>
                 <span className="dislikeCounter">{dislike[item.id] || 0}</span>
               </div>
+              </div>
+              <div className="comment arrange">
+          <button className='cmtButton'><img src="/src/assets/comment.svg" alt="" /></button>
+        </div>
             </div>
             <div className="broadLine"></div>
           </div>))}

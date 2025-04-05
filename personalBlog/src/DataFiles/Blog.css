@@ -1,4 +1,7 @@
 article {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
   width: 58%;
   margin: 0 auto;
   margin-top: 20px;
@@ -51,10 +54,13 @@ article {
   margin: 23px 0;
   display: flex;
   justify-content: center;
+  object-fit: contain;
+  background-repeat: no-repeat;
 }
 
 .postImg img {
   object-fit: contain;
+  width: 100%;
 }
 
 .blogContent {
@@ -94,6 +100,11 @@ article {
   padding: 0 20px;
   margin: 13px 0;
   height: 27px;
+  justify-content: space-between;
+}
+
+.actions {
+  display: flex;
 }
 
 .arrange {
@@ -123,6 +134,15 @@ article {
   display: flex;
   flex-flow: column;
   gap: 13px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+.showComment {
+  opacity: 1;
+  max-height: 500px;
 }
 
 .heading {
@@ -230,4 +250,9 @@ article {
 .error {
   color: red;
   display: none;
+}
+
+.cmtButton {
+  width: 40px;
+  height: 40px;
 }

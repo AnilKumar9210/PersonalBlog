@@ -15,6 +15,7 @@ const Post = () => {
   const [Id,setId] = useState ("");
   const [heading,setHeading] = useState ("");
   const [category,setCategory] = useState ("choose");
+  const [bgImages,setbgImages] = useState (['image1.jpg','image2.jpg','image3.jpg','image4.jpg','image5.jpg','image6.jpg','image7.jpg','image8.jpg','image9.jpg','image10.jpg',])
 
   useEffect (()=> {
     async function getData () {
@@ -51,6 +52,7 @@ const Post = () => {
     // await addDoc (storageRef, {title,content})
     // .then (()=>console.log("updated successfully"))
     // .catch ((err)=> console.log("Error : ",err));
+    console.log(`${bgImages[Math.floor(Math.random ()*11)]}`)
     
     // const storageRef = ref(storage, `images/${Date.now()}-${image.name}`);
     try {
@@ -62,6 +64,7 @@ const Post = () => {
         title:title,
         heading:heading,
         category:category,
+        imgUrl:`${bgImages[Math.floor(Math.random ()*11)]}`,
       });
       console.log(category)
       sucessRef.current.style.display = 'block';
@@ -71,6 +74,7 @@ const Post = () => {
     }
     setTitle ("");
     setContent ("");
+    setHeading ("");
     
   };
 

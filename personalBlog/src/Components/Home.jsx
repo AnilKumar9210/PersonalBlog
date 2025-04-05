@@ -1,6 +1,7 @@
 import React from "react";
 import CardNav from "./CardNav";
 import "./Home.css";
+import Template from "../DataFiles/Template";
 
 const Home = () => {
   const Footer = () => {
@@ -77,6 +78,7 @@ const Home = () => {
           location="work"
         />
       </div>
+      <Template/>
       <Footer />
     </div>
   );

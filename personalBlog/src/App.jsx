@@ -19,6 +19,7 @@ import Post from "./DataFiles/Post";
 import CreateProfile from "./DataFiles/CreateProfile";
 import { db } from "./config/firebase";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import FullBlog from "./DataFiles/FullBlog";
 
 function App() {
   const signOutRef = useRef(null);
@@ -106,6 +107,7 @@ function App() {
           <Route path="/Travel" element={<Travel />} />
           <Route path="/About" element={<About />} />
           <Route path="/create-post" element={<Post />} />
+          <Route path="/fullBlog" element={<FullBlog/>} />
         </Routes>
       <SignOutPopup />
       <CreateBlog/>
