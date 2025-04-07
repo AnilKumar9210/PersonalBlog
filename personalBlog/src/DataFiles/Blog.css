@@ -134,15 +134,14 @@ article {
   display: flex;
   flex-flow: column;
   gap: 13px;
-  opacity: 0;
-  max-height: 0;
+  opacity: 1;
+  max-height: 500px;
   overflow: hidden;
   transition: opacity 0.3s ease, max-height 0.3s ease;
 }
 
 .showComment {
-  opacity: 1;
-  max-height: 500px;
+  
 }
 
 .heading {

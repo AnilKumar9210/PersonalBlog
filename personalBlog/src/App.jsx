@@ -107,7 +107,7 @@ function App() {
           <Route path="/Travel" element={<Travel />} />
           <Route path="/About" element={<About />} />
           <Route path="/create-post" element={<Post />} />
-          <Route path="/fullBlog" element={<FullBlog/>} />
+          <Route path="/fullBlog/:id" element={<FullBlog/>} />
         </Routes>
       <SignOutPopup />
       <CreateBlog/>

@@ -1,31 +1,83 @@
-import {React,useState,useRef} from "react";
-import {useLocation} from "react-router-dom";
+import {React,useState,useRef,useContext, useEffect} from "react";
+import {useParams} from "react-router-dom";
 import { db } from "../config/firebase";
-import { collection, getDocs, updateDoc,doc , increment } from "firebase/firestore";
-import { useNavigate } from "react-router-dom"; 
+import { collection, getDocs, updateDoc,doc , increment, getDoc } from "firebase/firestore";
+import {useBlog} from '../Context/BlogContext.jsx'
+import { ref } from "firebase/storage";
+import Comments from "./Comments.jsx";
 
 const FullBlog = () => {
 
-  const location = useLocation ();
-  const blogData = location.state;
+
+  const {id} = useParams ();
+  const [fullData,setFullData] = useState ([]);
   const [likeCounter, setLikeCounter] = useState({});
   const [dislike, setDislike] = useState({});
   const [liked, setLiked] = useState({});
   const [disliked, setDisliked] = useState({});
   const [comment, setComment] = useState("");
   const [cmtList, setCmtList] = useState([]);
-  const commentRef = useRef(null);
+  const [showComment,setShowComment] = useState(false);
   const errorRef = useRef(null);
-  // const usrData = useState ({...blogData})
+  // const usrData = useState ({...fullData})
+
+  useEffect (() => {
+    async function getData() {
+      const docRef = doc (db,"Blog",id);
+      const docSnap = await getDoc (docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data ();
+        setFullData (data)
+        setLikeCounter ((prev)=> ({...prev,[id]: (data.likes)}));
+        setDislike ((prev)=> ({...prev,[id]: (data.dislikes)}));
+        setLiked ((prev)=> ({...prev,[id]: (data.likes !== 0 ? true : false)}));
+        setDisliked ((prev)=> ({...prev,[id]: (data.dislikes !== 0 ? true : false)}));
+      } else {
+        console.log("No such document!");
+      }
+    }
+    getData ()
+  },[id]);
+
+
+  const Footer = () => {
+    return (
+      <footer>
+        <div className="about">
+          <div className="box">
+            <img
+              src="https://www.hollywoodreporter.com/wp-content/uploads/2022/02/Daredevil-Charlie-Cox-Marvel-Everett-TCDDARE_EC009-H-2022.jpg?w=1296&h=730&crop=1"
+              alt="Error"
+            />
+            <span className="heading">Anil Kumar</span>
+          </div>
+          <div className="info">
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore
+              natus, dolores facere cum id ea. Eius quibusdam voluptatum
+              sapiente ipsa necessitatibus praesentium aliquid provident unde
+              doloribus, vel similique odit impedit molestiae facere?
+            </p>
+            <a to="/profile">Read more</a>
+          </div>
+        </div>
+        <div className="contact">
+          <span className="heading">Join my Mailing list</span>
+          <label htmlFor="email">Email *</label>
+          <input type="email" name="email" />
+          <button className="sub">Subscribe</button>
+        </div>
+      </footer>
+    );
+  };
+
+
 
   const toggleComment = () => {
-    if (commentRef.current) {
-      commentRef.current.classList.toggle("showComment");
-    }
+    setShowComment (prev=> !prev);
   };
 
   const handleLikes = async (e) => {
-    console.log(e.currentTarget.value);
     const postId = e.currentTarget.value;
 
     if (liked[postId]) {
@@ -63,7 +115,6 @@ const FullBlog = () => {
   };
 
   const handleDislikes = async (e) => {
-    console.log(e.currentTarget.value, typeof e);
     const postId = e.currentTarget.value;
 
     if (disliked[postId]) {
@@ -113,98 +164,53 @@ const FullBlog = () => {
     }
   };
 
-  const Comments = () => {
-    return (
-      <div className="comments" ref={commentRef}>
-        <div className="heading">Comments</div>
-        <div className="line"></div>
-        <div className="write">
-          <textarea
-            name="cmts"
-            placeholder="Write your opinion ...."
-            minLength={4}
-            id=""
-            onChange={(e) => setComment(e.target.value)}
-            rows={5}
-            cols={40}
-            value={comment}
-          />
-          <div className="error" ref={errorRef}>
-            Please enter a valid comment...
-          </div>
-          <button className="publishBtn" onClick={handlePublish}>
-            publish
-          </button>
-        </div>
-        <div className="line"></div>
-        <>
-          {cmtList.map((item) => {
-            return (
-              <div className="opinions">
-                <div className="cmtUsers">
-                  <span>
-                    <img src="/src/assets/profileImg.png" alt="profile" />
-                  </span>
-                  <span>unknown user</span>
-                </div>
-                <div className="cmtContent">
-                  <span>{item}</span>
-                </div>
-              </div>
-            );
-          })}
-        </>
-      </div>
-    );
-  };
+  
 
-  return (
-    <article>
+  return (<>    <article>
       <div className="postUserInfo">
         <span>
           <img src="/src/assets/profileImg.png" alt="profile" />
         </span>
-        <span onClick={() => console.log(blogData.id)}>mafia madhu</span>
+        <span>mafia madhu</span>
         <span>29 feb 2023</span>
       </div>
       <div className="postInfo">
-        {console.log(blogData)}
-        <span>{blogData.title}</span>
-        <span>{blogData.heading}</span>
+        <span>{fullData.title}</span>
+        <span>{fullData.heading}</span>
       </div>
       <div className="postImg">
         <img
-          src={`/src/backgroundImages/${blogData.category}/${blogData.imgUrl}`}
-          alt={`${blogData.category}`}
+          src={`/src/backgroundImages/${fullData.category}/${fullData.imgUrl}`}
+          alt={`${fullData.category}`}
         />
       </div>
-      <div className="blogContent">{blogData.content}</div>
+      <div className="blogContent">{fullData.content}</div>
       <div className="margin-top">
         {/* <hr /> */}
         <div className="line"></div>
         <div className="react">
           <div className="actions">
             <div className="like arrange">
-              <button onClick={handleLikes} value={blogData.id}>
+              <button onClick={handleLikes} value={fullData.id}>
                 <img src="/src/assets/thumbs-up.svg" alt="" />
               </button>
               <span className="likeCounter">
-                {likeCounter[blogData.id] || blogData.likes}
+                {likeCounter[fullData.id] || fullData.likes}
               </span>
             </div>
             <div className="dislike arrange">
-              <button onClick={handleDislikes} value={blogData.id}>
+              <button onClick={handleDislikes} value={fullData.id}>
                 <img src="/src/assets/thumbs-down.svg" alt="" />
               </button>
               <span className="dislikeCounter">
-                {dislike[blogData.id] || blogData.dislikes}
+                {dislike[fullData.id] || fullData.dislikes}
               </span>
             </div>
           </div>
           <div className="comment arrange">
             <button
               className="cmtButton"
-              value={blogData.id}
+              value={fullData.id}
               onClick={toggleComment}
             >
               <img src="/src/assets/comment.svg" alt="" />
@@ -213,7 +219,15 @@ const FullBlog = () => {
         </div>
         <div className="line"></div>
       </div>
-      <Comments />
+      {showComment && (
+  <Comments
+    comment={comment}
+    setComment={setComment}
+    cmtList={cmtList}
+    handlePublish={handlePublish}
+    errorRef={errorRef}
+  />
+)}
       <div>
         <div className="line"></div>
 
@@ -287,11 +301,13 @@ const FullBlog = () => {
               </svg>
             </span>
           </div>
-          <span>{blogData.category}</span>
+          <span>{fullData.category}</span>
         </div>
         <div className="line"></div>
       </div>
     </article>
+      <Footer/></>
+
   );
 };
 

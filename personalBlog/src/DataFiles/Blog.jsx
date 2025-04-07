@@ -3,6 +3,7 @@ import './Blog.css'
 import { db } from "../config/firebase";
 import { collection, getDocs, updateDoc,doc , increment } from "firebase/firestore";
 import { useNavigate } from "react-router-dom"; 
+import Comments from './Comments';
 
 const Blog = ({blogData}) => {
   const [likeCounter,setLikeCounter] = useState ({});
@@ -11,14 +12,12 @@ const Blog = ({blogData}) => {
   const [disliked,setDisliked] = useState({});
   const [comment,setComment] = useState ("");
   const [cmtList,setCmtList] = useState ([]);
-  const commentRef = useRef (null);
   const errorRef = useRef (null);
+  const [showComment,setShowComment] = useState (false);
   // const usrData = useState ({...blogData})
 
   const toggleComment = ()=> {
-    if (commentRef.current) {
-      commentRef.current.classList.toggle ("showComment")
-    }
+    setShowComment (prev=> !prev)
   }
 
  const handleLikes = async(e) => {
@@ -102,36 +101,7 @@ const Blog = ({blogData}) => {
   }
   }
 
-  const Comments = ()=> {
-    return <div className="comments" ref={commentRef} >
-      <div className="heading">Comments</div>
-      <div className="line"></div>
-      <div className="write">
-        <textarea name="cmts" 
-          placeholder='Write your opinion ....' 
-          minLength={4}
-          id="" onChange={(e)=>setComment (e.target.value)}
-          rows={5}
-          cols={40}
-          value={comment}
-          />
-        <div className='error' ref={errorRef}>Please enter a valid comment...</div>
-        <button className='publishBtn' onClick={handlePublish}>publish</button>
-      </div>
-      <div className="line"></div>
-      <>{cmtList.map ((item)=> {return <div className="opinions">
-        <div className="cmtUsers">
-          <span><img src="/src/assets/profileImg.png" alt="profile" /></span>
-          <span>unknown user</span>
-        </div>
-        <div className="cmtContent">
-          <span>{item}</span>
-        </div>
-      </div>
-      })}
-      </>
-    </div>
-  }
+  
 
   return (
     <article>
@@ -141,7 +111,6 @@ const Blog = ({blogData}) => {
         <span>29 feb 2023</span>
       </div>
       <div className='postInfo'>
-        {console.log(blogData)}
         <span>{blogData.title}</span>
         <span>{blogData.heading}</span>
       </div>
@@ -167,12 +136,22 @@ const Blog = ({blogData}) => {
         </div>
         </div>
         <div className="comment arrange">
-          <button className='cmtButton' value={blogData.id} onClick={toggleComment}><img src="/src/assets/comment.svg" alt="" /></button>
+          <button className='cmtButton' value={blogData.id} onClick={toggleComment}>
+            <img src="/src/assets/comment.svg" alt="comments" />
+            </button>
         </div>
       </div>
         <div className="line"></div>
       </div>
-      <Comments />
+      {showComment && (
+  <Comments
+    comment={comment}
+    setComment={setComment}
+    cmtList={cmtList}
+    handlePublish={handlePublish}
+    errorRef={errorRef}
+  />
+)}
       <div>
         <div className="line"></div>
         
